@@ -20,7 +20,7 @@ data.filter <- data.filter %>%
 data.filter <- data.filter[order(as.Date(data.filter$Date, format="%m/%d/%Y")),]
 
 
-data.filter.ts <- ts(data.filter[ ,-1], frequency = length(data.filter[ ,1]), start = c(1, 1, 2019), end = c(3, 31, 2019))#, end = c(3, 31, 2019))
+data.filter.ts <- ts(data.filter[ ,-1], frequency = 3, start = c(1, 1, 2019), end = c(3, 31, 2019))#, end = c(3, 31, 2019))
 
 #data.filter.ts <- data.filter.ts[order(data.filter.ts[ ,10]), ]
 
@@ -37,4 +37,9 @@ ses.ts <- ses(data.filter.ts,
               h = 100)
 autoplot(ses.ts)
 
+
+ses.ts <- ses(diff(data.filter.ts), 
+              alpha = .2,
+              h = 100)
+autoplot(ses.ts)
 
